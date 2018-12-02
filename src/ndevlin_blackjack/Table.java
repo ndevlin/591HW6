@@ -20,6 +20,7 @@ public class Table
 	{
 		Scanner scan = new Scanner(System.in);
 		// BJORN WAS HEREEEEE
+		// a second commit 
 		
 		Dealer theDealer = new Dealer();
 		Player thePlayer = new Player();
