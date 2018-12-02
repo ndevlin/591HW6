@@ -1,5 +1,6 @@
 
 package gui;
+// THIRD COMMENT 649PM -BJORN
 
 import javax.swing.*;
 import java.util.*;
@@ -105,7 +106,7 @@ public class Gui extends JFrame
 		noButton.setBounds(600, 600, 120, 80);
 		noButton.setBackground(colorButton);
 		noButton.setFont(buttonFont);
-		hitButton.setText("NO");
+		noButton.setText("NO");
 		
 		board.add(noButton);
 		
