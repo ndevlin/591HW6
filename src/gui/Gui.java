@@ -28,10 +28,19 @@ public class Gui extends JFrame
 	
 	
 	// Buttons
-	Button hitButton = new Button();
-	Button stayButton = new Button();
-	Button yesButton = new Button();
-	Button noButton = new Button();
+	JButton hitButton = new JButton();
+	JButton stayButton = new JButton();
+	JButton yesButton = new JButton();
+	JButton noButton = new JButton();
+	
+	
+	// Card grid positioning and Dimensions
+	int gridX = 50;
+	int gridY = 50;
+	int gridW = 900;
+	int gridH = 400;
+	
+	
 	
 	
 	// Fonts
@@ -48,7 +57,7 @@ public class Gui extends JFrame
 		
 		Board board = new Board();
 		this.setContentPane(board);
-		//this.setLayout(null);
+		this.setLayout(null);
 		
 		
 		// Hit button
@@ -58,7 +67,7 @@ public class Gui extends JFrame
 		hitButton.setBounds(400, 400, 120, 80);
 		hitButton.setBackground(colorButton);
 		hitButton.setFont(buttonFont);
-		//hitButton.setText("HIT");
+		hitButton.setText("HIT");
 		
 		board.add(hitButton);
 		
@@ -71,7 +80,7 @@ public class Gui extends JFrame
 		stayButton.setBounds(600, 400, 120, 80);
 		stayButton.setBackground(colorButton);
 		stayButton.setFont(buttonFont);
-		//stayButton.setText("STAY");
+		stayButton.setText("STAY");
 		
 		board.add(stayButton);
 		
@@ -84,7 +93,7 @@ public class Gui extends JFrame
 		yesButton.setBounds(400, 600, 120, 80);
 		yesButton.setBackground(colorButton);
 		yesButton.setFont(buttonFont);
-		//yesButton.setText("YES");
+		yesButton.setText("YES");
 		
 		board.add(yesButton);
 		
@@ -96,7 +105,7 @@ public class Gui extends JFrame
 		noButton.setBounds(600, 600, 120, 80);
 		noButton.setBackground(colorButton);
 		noButton.setFont(buttonFont);
-		//hitButton.setText("NO");
+		hitButton.setText("NO");
 		
 		board.add(noButton);
 		
@@ -116,6 +125,14 @@ public class Gui extends JFrame
 		{
 			graphic.setColor(backgroundColor);
 			graphic.fillRect(0, 0, WIDTH, HEIGHT);
+			
+			
+			// Temporary Grid Painting
+			graphic.setColor(Color.black);
+			graphic.drawRect(gridX, gridY, gridW, gridH);
+			
+			// Temporary Log Borders Painting
+			graphic.drawRect(gridX, gridY+ gridH + 100, gridW, gridH);
 			
 			
 		}
