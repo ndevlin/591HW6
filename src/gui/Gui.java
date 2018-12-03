@@ -67,7 +67,10 @@ public class Gui extends JFrame
 	int cardActualHeight = cardTotalWidth - 2*cardSpacing;
 	
 	// Fonts
-	Font buttonFont = new Font("Times New Roman", Font.PLAIN, 40);
+	Font buttonFont = new Font("Times New Roman", Font.PLAIN, 30);
+	// Nathan modified font from 40 to 30
+	
+	// Tested on Windows VM
 	
 	
 	public Gui()
