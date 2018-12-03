@@ -53,6 +53,18 @@ public class Gui extends JFrame
 	int paW = hsW;
 	int paH = 200;
 	
+	// ArrayList that will hold all of the cards in the deck, player's cards, and dealer's cards
+	ArrayList<Card> all_cards = new ArrayList<Card>();
+	ArrayList<Card> player_cards = new ArrayList<Card>();
+	ArrayList<Card> dealer_cards = new ArrayList<Card>();
+
+	int cardSpacing = 10;
+	// We want to have space for six cards across in our grid
+	int cardTotalWidth = gridW/6;
+	// ...and space for two cards in "height" on the playing grid
+	int cardTotalHeight = gridH/2;
+	int cardActualWidth = cardTotalWidth - 2*cardSpacing;
+	int cardActualHeight = cardTotalWidth - 2*cardSpacing;
 	
 	// Fonts
 	Font buttonFont = new Font("Times New Roman", Font.PLAIN, 40);
@@ -122,6 +134,25 @@ public class Gui extends JFrame
 		
 		board.add(noButton);
 		
+		// Using a nested for-loop to add the suit and the value
+			// for each of the cards in the ArrayList all_cards
+		String suit = null;
+		for(int k = 0; k < 4; k++) {
+			if (k ==0) {
+				suit = "Hearts";
+			} else if (k == 1) {
+				suit = "Diamonds";
+			} else if (k == 2) {
+				suit = "Spades";
+			} else {
+				suit = "Clubs";
+			}
+			for (int j = 2; j < 15; j++) {
+				all_cards.add(new Card(j, suit));
+			}
+			
+		}
+		
 		
 	}
 	
@@ -152,6 +183,14 @@ public class Gui extends JFrame
 			
 			// temp "play again" grid
 			graphic.drawRect(paX, paY, paW, paH);
+			
+			// make a for-loop to draw the grid spaces where each card will be (both our cards and dealer's cards)
+			// we'll say six cards for now... seems very unlikely we'd ever need more than six for a given hand- unless we build-in splitting functionality later
+			for (int i = 0; i < 6; i++) {
+				graphic.drawRect(gridX+i*cardTotalWidth+cardSpacing, gridY+cardSpacing, cardActualWidth, cardActualHeight);
+				// dealer cards (higher on the grid than our cards...specifically by "cardSpacing" amount)
+				graphic.drawRect(gridX+i*cardTotalWidth+cardSpacing, gridY+cardSpacing+cardTotalHeight, cardActualWidth, cardActualHeight);
+			}
 		}  
 		
 	}
