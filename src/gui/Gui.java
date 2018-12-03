@@ -1,6 +1,5 @@
 
 package gui;
-// THIRD COMMENT 649PM -BJORN
 
 import javax.swing.*;
 import java.util.*;
@@ -36,12 +35,23 @@ public class Gui extends JFrame
 	
 	
 	// Card grid positioning and Dimensions
+	// Grid will be the area that the cards are displayed...
 	int gridX = 50;
 	int gridY = 50;
 	int gridW = 900;
 	int gridH = 400;
 	
+	// totals, hit/stay grid positions/dimensions
+	int hsX = gridX + gridW + 50;
+	int hsY = gridY;
+	int hsW = 230;
+	int hsH = 400;
 	
+	// "play again?" question grid
+	int paX = hsX;
+	int paY = hsY + hsH + 50;
+	int paW = hsW;
+	int paH = 200;
 	
 	
 	// Fonts
@@ -65,11 +75,13 @@ public class Gui extends JFrame
 		ActionHit aHit = new ActionHit();
 		hitButton.addActionListener(aHit);
 		
-		hitButton.setBounds(400, 400, 120, 80);
+		// Set the location/color/font/text for the hit button
+		hitButton.setBounds(hsX+55, hsY+40, 120, 80);
 		hitButton.setBackground(colorButton);
 		hitButton.setFont(buttonFont);
 		hitButton.setText("HIT");
 		
+	 
 		board.add(hitButton);
 		
 		
@@ -77,8 +89,8 @@ public class Gui extends JFrame
 		// Stay button
 		ActionStay aStay = new ActionStay();
 		stayButton.addActionListener(aStay);
-		
-		stayButton.setBounds(600, 400, 120, 80);
+		// Settings for Stay button:
+		stayButton.setBounds(hsX+55, hsY+280, 120, 80);
 		stayButton.setBackground(colorButton);
 		stayButton.setFont(buttonFont);
 		stayButton.setText("STAY");
@@ -87,11 +99,11 @@ public class Gui extends JFrame
 		
 		
 		
-		// Yes Button
+		// Yes Button (to "play again?")
 		ActionYes aYes = new ActionYes();
 		yesButton.addActionListener(aYes);
 		
-		yesButton.setBounds(400, 600, 120, 80);
+		yesButton.setBounds(paX+10, paY+110, 100, 80);
 		yesButton.setBackground(colorButton);
 		yesButton.setFont(buttonFont);
 		yesButton.setText("YES");
@@ -99,11 +111,11 @@ public class Gui extends JFrame
 		board.add(yesButton);
 		
 		
-		//
+		// No Button (to "play again?")
 		ActionNo aNo = new ActionNo();
 		noButton.addActionListener(aNo);
 		
-		noButton.setBounds(600, 600, 120, 80);
+		noButton.setBounds(paX+120, paY+110, 100, 80);
 		noButton.setBackground(colorButton);
 		noButton.setFont(buttonFont);
 		noButton.setText("NO");
@@ -133,10 +145,14 @@ public class Gui extends JFrame
 			graphic.drawRect(gridX, gridY, gridW, gridH);
 			
 			// Temporary Log Borders Painting
-			graphic.drawRect(gridX, gridY+ gridH + 100, gridW, gridH);
+			graphic.drawRect(gridX, gridY+ gridH + 50, gridW, gridH);
 			
+			// temp totals, hit/stay buttons grid, and messages
+			graphic.drawRect(hsX,  hsY,  hsW,  hsH);
 			
-		}
+			// temp "play again" grid
+			graphic.drawRect(paX, paY, paW, paH);
+		}  
 		
 	}
 	
