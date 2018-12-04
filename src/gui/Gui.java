@@ -71,7 +71,7 @@ public class Gui extends JFrame
 	// ...and space for two cards in "height" on the playing grid
 	int cardTotalHeight = gridH/2;
 	int cardActualWidth = cardTotalWidth - 2*cardSpacing;
-	int cardActualHeight = cardTotalWidth - 2*cardSpacing;
+	int cardActualHeight = cardTotalHeight- 2*cardSpacing;
 	
 	// Fonts
 	Font buttonFont = new Font("Times New Roman", Font.PLAIN, 30);
@@ -98,7 +98,7 @@ public class Gui extends JFrame
 		
 		// Set the location/color/font/text for the hit button
 		hitButton.setBounds(hsX+55, hsY+40, 120, 80);
-		hitButton.setBackground(colorButton);
+		hitButton.setBackground(Color.yellow);
 		hitButton.setFont(buttonFont);
 		hitButton.setText("HIT");
 		
@@ -112,7 +112,7 @@ public class Gui extends JFrame
 		stayButton.addActionListener(aStay);
 		// Settings for Stay button:
 		stayButton.setBounds(hsX+55, hsY+280, 120, 80);
-		stayButton.setBackground(colorButton);
+		stayButton.setBackground(Color.yellow);
 		stayButton.setFont(buttonFont);
 		stayButton.setText("STAY");
 		
@@ -125,7 +125,7 @@ public class Gui extends JFrame
 		yesButton.addActionListener(aYes);
 		
 		yesButton.setBounds(paX+10, paY+110, 100, 80);
-		yesButton.setBackground(colorButton);
+		yesButton.setBackground(Color.yellow);
 		yesButton.setFont(buttonFont);
 		yesButton.setText("YES");
 		
@@ -137,7 +137,7 @@ public class Gui extends JFrame
 		noButton.addActionListener(aNo);
 		
 		noButton.setBounds(paX+120, paY+110, 100, 80);
-		noButton.setBackground(colorButton);
+		noButton.setBackground(Color.yellow);
 		noButton.setFont(buttonFont);
 		noButton.setText("NO");
 		
@@ -162,11 +162,6 @@ public class Gui extends JFrame
 			
 		}
 		
-		
-		
-		
-		
-		
 	}
 	
 	
@@ -180,9 +175,9 @@ public class Gui extends JFrame
 		 
 		public void paintComponent(Graphics graphic)
 		{
+			// Got background color to work
 			graphic.setColor(backgroundColor);
-			graphic.fillRect(0, 0, WIDTH, HEIGHT);
-			
+			graphic.fillRect(0, 0, 1280, 720);
 			
 			// Temporary Grid Painting
 			graphic.setColor(Color.black);
@@ -197,15 +192,20 @@ public class Gui extends JFrame
 			// temp "play again" grid
 			graphic.drawRect(paX, paY, paW, paH);
 			
+			
 			// make a for-loop to draw the grid spaces where each card will be (both our cards and dealer's cards)
 			// we'll say six cards for now... seems very unlikely we'd ever need more than six for a given hand- unless we build-in splitting functionality later
+			
+			/* Hide card grid
 			for (int i = 0; i < 6; i++) {
 				graphic.drawRect(gridX+i*cardTotalWidth+cardSpacing, gridY+cardSpacing, cardActualWidth, cardActualHeight);
 				// dealer cards (higher on the grid than our cards...specifically by "cardSpacing" amount)
 				graphic.drawRect(gridX+i*cardTotalWidth+cardSpacing, gridY+cardSpacing+cardTotalHeight, cardActualWidth, cardActualHeight);
 			}
+			*/
 			
 
+			// Draw Cards
 			int index = 0;
 			for(Card c: all_cards)
 			{
@@ -220,14 +220,35 @@ public class Gui extends JFrame
 				graphic.fillRect(gridX+index*cardTotalWidth+cardSpacing+cardEdgeSoften, 
 					gridY+cardSpacing, cardActualWidth - 2*cardEdgeSoften, 
 					cardActualHeight);
-				
 					 
-				// Original full-size rectangle
+				// Original full-size rectangle:
 				//graphic.fillRect(gridX+index*cardTotalWidth+cardSpacing, 
 				//	gridY+cardSpacing, cardActualWidth, cardActualHeight);
 					
+				
+				// Draw 4 circles to create round edges
+				// Upper Left
+				graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing, 
+					gridY+cardSpacing, 2*cardEdgeSoften, 2*cardEdgeSoften);
+				// Upper Right
+				graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing+cardActualWidth-2*cardEdgeSoften, 
+					gridY+cardSpacing, 2*cardEdgeSoften, 2*cardEdgeSoften);
+				// Lower Left
+				graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing, 
+					gridY+cardSpacing+cardActualHeight-2*cardEdgeSoften,
+					2*cardEdgeSoften, 2*cardEdgeSoften);
+				// Lower Right
+				graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing+cardActualWidth-2*cardEdgeSoften, 
+					gridY+cardSpacing+cardActualHeight-2*cardEdgeSoften,
+					 2*cardEdgeSoften, 2*cardEdgeSoften);
+				
 					
-				graphic.setColor(Color.black);
+				graphic.setColor(Color.red);
+				
+				//Add code to setColor to Black if card suit is 
+					// Spade or Club
+					// graphic.setColor(Color.red);
+				
 				graphic.setFont(cardFont);
 				graphic.drawString(c.symbol, 
 					gridX+index*cardTotalWidth+cardSpacing*2, 
