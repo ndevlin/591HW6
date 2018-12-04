@@ -247,13 +247,58 @@ public class Gui extends JFrame
 				
 				//Add code to setColor to Black if card suit is 
 					// Spade or Club
-					// graphic.setColor(Color.red);
+				if (c.suit.equalsIgnoreCase("Spades")||c.suit.equalsIgnoreCase("Clubs")) {
+					graphic.setColor(Color.black);
+				}
+				
+
+				
+				// Draw spades
+				if(c.suit.equalsIgnoreCase("Spades")) {
+					graphic.setColor(Color.black);
+					// fill ovals for Spades
+					graphic.fillOval(gridX+index*cardTotalWidth+40, gridY+85, 40, 40);
+					graphic.fillOval(gridX+index*cardTotalWidth+40+30, gridY+85, 40, 40);
+					// fill arc for Spades
+					graphic.fillArc(gridX+index*cardTotalWidth+28, gridY+30, 90, 70, 230, 80);
+					// fill rectangle (the little stem at the base of the spade)
+					graphic.fillRect(gridX+index*cardTotalWidth+70, gridY+90, 10, 50);
+					// Note that we don't use an image file and instead draw the image because the program would not be portable itself if it relied upon
+						// an image file being present... it's easier to have the Java program draw the shape itself so we don't have to worry about
+						// having the program call to an image file that may or may not be in the right directory, etc
+				} else if(c.suit.equalsIgnoreCase("Hearts")) {
+					// draw hearts
+					graphic.setColor(Color.red);
+					graphic.fillOval(gridX+index*cardTotalWidth+40, gridY+70, 40, 40);
+					graphic.fillOval(gridX+index*cardTotalWidth+40+30, gridY+70, 40, 40);
+					graphic.fillArc(gridX+index*cardTotalWidth+30, gridY+96, 90, 70, 50, 80);
+				} else if(c.suit.equalsIgnoreCase("Diamonds")) {
+					//Draw Diamonds
+					graphic.setColor(Color.red);
+					// fillPolygon will, as the name implies, fill an n-sided polygon given an array of x and y coordinates
+					int x1,x2,x3,x4,y1,y2,y3,y4;
+					x1 = 75 + gridX + index*cardTotalWidth;
+					y1 = 60 + gridY;
+					x2 = 50 + gridX + index*cardTotalWidth;
+					y2 = 100 + gridY;
+					x3 = 75+ gridX + index*cardTotalWidth;;
+					y3 = 140 + gridY;
+					x4 = 100+ gridX + index*cardTotalWidth;;
+					y4 = 100 + gridY;
+					int[] xPolyCoordinates = {x1, x2, x3, x4};
+					int[] yPolyCoordinates = {y1, y2, y3, y4};
+					graphic.fillPolygon(xPolyCoordinates, yPolyCoordinates, 4);
+				}
+				
 				
 				graphic.setFont(cardFont);
 				graphic.drawString(c.symbol, 
 					gridX+index*cardTotalWidth+cardSpacing*2, 
 					gridY+cardActualHeight);
 				
+				if (c.symbol.equalsIgnoreCase("Spades")) {
+					
+				}
 				
 				index++;
 				if(index > 5)
