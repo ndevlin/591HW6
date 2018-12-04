@@ -1,6 +1,9 @@
 package gui;
 
 
+import ndevlin_blackjack.*;
+
+
 /**
  * @author Nathan
  */
