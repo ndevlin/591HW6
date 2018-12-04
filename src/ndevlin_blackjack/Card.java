@@ -41,6 +41,13 @@ public class Card
 	
 	private boolean isAce;
 	
+	
+	// Changed for GUI implementation
+	private String symbol;
+	
+	
+	// Constructor
+	
 	public Card(int cardNumIn)
 	{
 		cardNumber = cardNumIn;
@@ -63,10 +70,42 @@ public class Card
 		{
 			isAce = false;
 		}
+		
+		
+		
+		if(39 < cardNumber && cardNumber < 44)
+		{
+			symbol = "J";
+		}
+		else if(43 < cardNumber && cardNumber < 48)
+		{
+			symbol = "Q";
+		}
+		else if(47 < cardNumber && cardNumber < 52)
+		{
+			symbol = "K";
+		}
+		else if(cardNumber < 4)
+		{
+			symbol = "A";
+		}
+		else
+		{
+			symbol = Integer.toString(value);
+		}
+		
+		
 	}
 
 	
 	// Getters and Setters
+	
+	/** returns the symbol variable */
+	public String getSymbol() {
+		return symbol;
+	}
+	
+	
 	
 	/** returns the cardNumber variable */
 	public int getCardNumber() {
