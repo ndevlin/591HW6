@@ -64,6 +64,9 @@ public class Gui extends JFrame
 
 	int cardSpacing = 10;
 	// We want to have space for six cards across in our grid
+	
+	int cardEdgeSoften = 10;
+	
 	int cardTotalWidth = gridW/6;
 	// ...and space for two cards in "height" on the playing grid
 	int cardTotalHeight = gridH/2;
@@ -72,9 +75,8 @@ public class Gui extends JFrame
 	
 	// Fonts
 	Font buttonFont = new Font("Times New Roman", Font.PLAIN, 30);
-	// Nathan modified font from 40 to 30
+	Font cardFont = new Font("Times New Roman", Font.BOLD, 35);
 	
-	// Tested on Windows VM
 	
 	
 	public Gui()
@@ -161,6 +163,10 @@ public class Gui extends JFrame
 		}
 		
 		
+		
+		
+		
+		
 	}
 	
 	
@@ -198,6 +204,43 @@ public class Gui extends JFrame
 				// dealer cards (higher on the grid than our cards...specifically by "cardSpacing" amount)
 				graphic.drawRect(gridX+i*cardTotalWidth+cardSpacing, gridY+cardSpacing+cardTotalHeight, cardActualWidth, cardActualHeight);
 			}
+			
+
+			int index = 0;
+			for(Card c: all_cards)
+			{
+				graphic.setColor(Color.white);
+				
+				// Draw 2 rectangles to allow for round edges
+				// 1st is short and squat
+				graphic.fillRect(gridX+index*cardTotalWidth+cardSpacing, 
+					gridY+cardSpacing+cardEdgeSoften,
+					 cardActualWidth, cardActualHeight - 2*cardEdgeSoften);
+				// Second is tall and skinny 
+				graphic.fillRect(gridX+index*cardTotalWidth+cardSpacing+cardEdgeSoften, 
+					gridY+cardSpacing, cardActualWidth - 2*cardEdgeSoften, 
+					cardActualHeight);
+				
+					 
+				// Original full-size rectangle
+				//graphic.fillRect(gridX+index*cardTotalWidth+cardSpacing, 
+				//	gridY+cardSpacing, cardActualWidth, cardActualHeight);
+					
+					
+				graphic.setColor(Color.black);
+				graphic.setFont(cardFont);
+				graphic.drawString(c.symbol, 
+					gridX+index*cardTotalWidth+cardSpacing*2, 
+					gridY+cardActualHeight);
+				
+				
+				index++;
+				if(index > 5)
+					break;
+			}
+			
+			
+			
 		}  
 		
 	}

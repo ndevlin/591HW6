@@ -19,9 +19,7 @@ public class Table
 	public static void main(String[] args)
 	{
 		Scanner scan = new Scanner(System.in);
-		// BJORN WAS HEREEEEE
-		// a second commit 
-		
+
 		Dealer theDealer = new Dealer();
 		Player thePlayer = new Player();
 		
