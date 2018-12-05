@@ -57,10 +57,13 @@ public class Gui extends JFrame
 	int paW = hsW;
 	int paH = 200;
 	
+	
 	// ArrayList that will hold all of the cards in the deck, player's cards, and dealer's cards
-	ArrayList<Card> all_cards = new ArrayList<Card>();
-	ArrayList<Card> player_cards = new ArrayList<Card>();
-	ArrayList<Card> dealer_cards = new ArrayList<Card>();
+	//ArrayList<Card> all_cards = new ArrayList<Card>();
+	ArrayList<ndevlin_blackjack.Card> player_cards = new ArrayList<ndevlin_blackjack.Card>();
+	ArrayList<ndevlin_blackjack.Card> dealer_cards = new ArrayList<ndevlin_blackjack.Card>();
+	
+	
 
 	int cardSpacing = 10;
 	// We want to have space for six cards across in our grid
@@ -145,6 +148,8 @@ public class Gui extends JFrame
 		
 		// Using a nested for-loop to add the suit and the value
 			// for each of the cards in the ArrayList all_cards
+		
+		/*
 		String suit = null;
 		for(int k = 0; k < 4; k++) {
 			if (k ==0) {
@@ -161,6 +166,7 @@ public class Gui extends JFrame
 			}
 			
 		}
+		*/
 		
 	}
 	
@@ -204,10 +210,15 @@ public class Gui extends JFrame
 			}
 			*/
 			
+			
+			// Update cards in player_cards
+			Driver.thePlayer.getPlayersHand().calculateCurrentHandValue();
+			player_cards = Driver.thePlayer.getPlayersHand().getTheHand();
+			
 
-			// Draw Cards
+			// Draw/Paint the Cards
 			int index = 0;
-			for(Card c: all_cards)
+			for(ndevlin_blackjack.Card c: player_cards)
 			{
 				graphic.setColor(Color.white);
 				
@@ -247,15 +258,15 @@ public class Gui extends JFrame
 				
 				//Add code to setColor to Black if card suit is 
 					// Spade or Club
-				if (c.suit.equalsIgnoreCase("Spades")||c.suit.equalsIgnoreCase("Clubs")) {
+				if (c.getName().contains("Spades")||c.getName().contains("Clubs")) {
 					graphic.setColor(Color.black);
 				}
 				
 
 
 				
-				// Draw spades
-				if(c.suit.equalsIgnoreCase("Spades")) {
+				// Draw/Paint spades
+				if(c.getName().contains("Spades")) {
 					graphic.setColor(Color.black);
 					// fill ovals for Spades
 					graphic.fillOval(gridX+index*cardTotalWidth+40, gridY+85, 40, 40);
@@ -267,14 +278,16 @@ public class Gui extends JFrame
 					// Note that we don't use an image file and instead draw the image because the program would not be portable itself if it relied upon
 						// an image file being present... it's easier to have the Java program draw the shape itself so we don't have to worry about
 						// having the program call to an image file that may or may not be in the right directory, etc
-				} else if(c.suit.equalsIgnoreCase("Hearts")) {
-					// draw hearts
+				} else if(c.getName().contains("Hearts")) 
+				{
+					// Draw hearts/Paint
 					graphic.setColor(Color.red);
 					graphic.fillOval(gridX+index*cardTotalWidth+40, gridY+70, 40, 40);
 					graphic.fillOval(gridX+index*cardTotalWidth+40+30, gridY+70, 40, 40);
 					graphic.fillArc(gridX+index*cardTotalWidth+30, gridY+96, 90, 70, 50, 80);
-				} else if(c.suit.equalsIgnoreCase("Diamonds")) {
-					//Draw Diamonds
+				} else if(c.getName().contains("Diamonds")) 
+				{
+					//Draw/Paint Diamonds
 					graphic.setColor(Color.red);
 					// fillPolygon will, as the name implies, fill an n-sided polygon given an array of x and y coordinates
 					int x1,x2,x3,x4,y1,y2,y3,y4;
@@ -304,13 +317,10 @@ public class Gui extends JFrame
 				
 				
 				graphic.setFont(cardFont);
-				graphic.drawString(c.symbol, 
+				graphic.drawString(c.getSymbol(), 
 					gridX+index*cardTotalWidth+cardSpacing*2, 
 					gridY+cardActualHeight);
 				
-				if (c.symbol.equalsIgnoreCase("Spades")) {
-					
-				}
 				
 				index++;
 				if(index > 5)
