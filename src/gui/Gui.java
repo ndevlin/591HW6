@@ -69,10 +69,10 @@ public class Gui extends JFrame
 	
 	
 	// ArrayList that will hold all of the cards in the deck, player's cards, and dealer's cards
-	//ArrayList<Card> all_cards = new ArrayList<Card>();
+	//ArrayList<ndevlin_blackjack.Card> all_cards = new ArrayList<ndevlin_blackjack.Card>();
 	ArrayList<ndevlin_blackjack.Card> player_cards = new ArrayList<ndevlin_blackjack.Card>();
 	ArrayList<ndevlin_blackjack.Card> dealer_cards = new ArrayList<ndevlin_blackjack.Card>();
-	
+	ndevlin_blackjack.Card visibleDealerCard;
 	
 
 	int cardSpacing = 10;
@@ -203,6 +203,13 @@ public class Gui extends JFrame
 	}
 	
 	
+	public void dealerHitOrStay()
+	{
+		
+	}
+	
+	
+	
 	
 	public class Board extends JPanel
 	{
@@ -254,12 +261,20 @@ public class Gui extends JFrame
 			*/
 			
 			
-			// Update cards in player_cards
+			// Update cards to be displayed
+			
+			// Update player's hand
 			Driver.thePlayer.getPlayersHand().calculateCurrentHandValue();
 			player_cards = Driver.thePlayer.getPlayersHand().getTheHand();
 			
+			// Updated Dealer's cards
+			Driver.theDealer.getDealerHand().calculateCurrentHandValue();
+			dealer_cards = Driver.theDealer.getDealerHand().getTheHand();
+			visibleDealerCard = Driver.theDealer.getVisibleCard();
+			
+			
 
-			// Draw/Paint the Cards
+			// Draw/Paint Player Cards
 			int index = 0;
 			for(ndevlin_blackjack.Card c: player_cards)
 			{
@@ -305,8 +320,6 @@ public class Gui extends JFrame
 					graphic.setColor(Color.black);
 				}
 				
-
-
 				
 				// Draw/Paint spades
 				if(c.getName().contains("Spades")) {
@@ -338,9 +351,9 @@ public class Gui extends JFrame
 					y1 = 60 + gridY;
 					x2 = 50 + gridX + index*cardTotalWidth;
 					y2 = 100 + gridY;
-					x3 = 75+ gridX + index*cardTotalWidth;;
+					x3 = 75+ gridX + index*cardTotalWidth;
 					y3 = 140 + gridY;
-					x4 = 100+ gridX + index*cardTotalWidth;;
+					x4 = 100+ gridX + index*cardTotalWidth;
 					y4 = 100 + gridY;
 					int[] xPolyCoordinates = {x1, x2, x3, x4};
 					int[] yPolyCoordinates = {y1, y2, y3, y4};
@@ -372,6 +385,250 @@ public class Gui extends JFrame
 			
 			
 			
+			
+			
+			
+			{	// Draw single visible dealer card
+				
+				graphic.setColor(Color.white);
+				
+				// Draw 2 rectangles to allow for round edges
+				// 1st is short and squat
+				graphic.fillRect(gridX+cardSpacing, 
+					gridY+cardTotalHeight+cardSpacing+cardEdgeSoften,
+					 cardActualWidth, cardActualHeight - 2*cardEdgeSoften);
+				// Second is tall and skinny 
+				graphic.fillRect(gridX+cardSpacing+cardEdgeSoften, 
+					gridY+cardTotalHeight+cardSpacing, cardActualWidth - 2*cardEdgeSoften, 
+					cardActualHeight);
+				
+				// Draw 4 circles to create round edges
+				// Upper Left
+				graphic.fillOval(gridX+cardSpacing, 
+					gridY+cardTotalHeight+cardSpacing, 2*cardEdgeSoften, 2*cardEdgeSoften);
+				// Upper Right
+				graphic.fillOval(gridX+cardSpacing+cardActualWidth-2*cardEdgeSoften, 
+					gridY+cardTotalHeight+cardSpacing, 2*cardEdgeSoften, 2*cardEdgeSoften);
+				// Lower Left
+				graphic.fillOval(gridX+cardSpacing, 
+					gridY+cardTotalHeight+cardSpacing+cardActualHeight-2*cardEdgeSoften,
+					2*cardEdgeSoften, 2*cardEdgeSoften);
+				// Lower Right
+				graphic.fillOval(gridX+cardSpacing+cardActualWidth-2*cardEdgeSoften, 
+					gridY+cardTotalHeight+cardSpacing+cardActualHeight-2*cardEdgeSoften,
+					 2*cardEdgeSoften, 2*cardEdgeSoften);
+				
+					
+				graphic.setColor(Color.red);
+				
+				//Add code to setColor to Black if card suit is 
+					// Spade or Club
+				if (visibleDealerCard.getName().contains("Spades")||
+						visibleDealerCard.getName().contains("Clubs")) {
+					graphic.setColor(Color.black);
+				}
+				
+				// Draw/Paint spades
+				if(visibleDealerCard.getName().contains("Spades")) {
+					graphic.setColor(Color.black);
+					// fill ovals for Spades
+					graphic.fillOval(gridX+40, 
+							gridY+cardTotalHeight+85, 40, 40);
+					graphic.fillOval(gridX+40+30, 
+							gridY+cardTotalHeight+85, 40, 40);
+					// fill arc for Spades
+					graphic.fillArc(gridX+28, 
+							gridY+cardTotalHeight+30, 90, 70, 230, 80);
+					// fill rectangle (the little stem at the base of the spade)
+					graphic.fillRect(gridX+70, 
+							gridY+cardTotalHeight+90, 10, 50);
+					// Note that we don't use an image file and instead draw the image because the program would not be portable itself if it relied upon
+						// an image file being present... it's easier to have the Java program draw the shape itself so we don't have to worry about
+						// having the program call to an image file that may or may not be in the right directory, etc
+				} else if(visibleDealerCard.getName().contains("Hearts")) 
+				{
+					// Draw hearts/Paint
+					graphic.setColor(Color.red);
+					graphic.fillOval(gridX+40, 
+							gridY+cardTotalHeight+70, 40, 40);
+					graphic.fillOval(gridX+40+30, 
+							gridY+cardTotalHeight+70, 40, 40);
+					graphic.fillArc(gridX+30, 
+							gridY+cardTotalHeight+96, 90, 70, 50, 80);
+				} else if(visibleDealerCard.getName().contains("Diamonds")) 
+				{
+					//Draw/Paint Diamonds
+					graphic.setColor(Color.red);
+					// fillPolygon will, as the name implies, fill an n-sided polygon given an array of x and y coordinates
+					int x1,x2,x3,x4,y1,y2,y3,y4;
+					x1 = 75 + gridX;
+					y1 = 60 + gridY+cardTotalHeight;
+					x2 = 50 + gridX;
+					y2 = 100 + gridY+cardTotalHeight;
+					x3 = 75+ gridX;
+					y3 = 140 + gridY+cardTotalHeight;
+					x4 = 100+ gridX;
+					y4 = 100 + gridY+cardTotalHeight;
+					int[] xPolyCoordinates = {x1, x2, x3, x4};
+					int[] yPolyCoordinates = {y1, y2, y3, y4};
+					graphic.fillPolygon(xPolyCoordinates, yPolyCoordinates, 4);
+				} else {
+					// Draw clubs by simply removing the arc from the spades drawing and replacing it with a third oval
+					// fill ovals for Clubs
+					graphic.setColor(Color.black);
+					graphic.fillOval(gridX+35, 
+							gridY+cardTotalHeight+85, 40, 40);
+					graphic.fillOval(gridX+40+35, 
+							gridY+cardTotalHeight+85, 40, 40);
+					// Third oval (instead of arc that's seen in Spades)
+					graphic.fillOval(gridX+55, 
+							gridY+cardTotalHeight+55, 40, 40);
+					
+					// fill rectangle (the little stem at the base of the spade)
+					graphic.fillRect(gridX+70, 
+							gridY+cardTotalHeight+90, 10, 50);
+				}
+				
+				
+				graphic.setFont(cardFont);
+				graphic.drawString(visibleDealerCard.getSymbol(), 
+					gridX+cardSpacing*2, 
+					gridY+cardTotalHeight+cardActualHeight);
+			
+			
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//Draw/ Paint Dealer Cards
+			if(isDealerTurn == true)
+			{
+				index = 0;
+				for(ndevlin_blackjack.Card c: dealer_cards)
+				{
+					graphic.setColor(Color.white);
+					
+					// Draw 2 rectangles to allow for round edges
+					// 1st is short and squat
+					graphic.fillRect(gridX+index*cardTotalWidth+cardSpacing, 
+						gridY+cardTotalHeight+cardSpacing+cardEdgeSoften,
+						 cardActualWidth, cardActualHeight - 2*cardEdgeSoften);
+					// Second is tall and skinny 
+					graphic.fillRect(gridX+index*cardTotalWidth+cardSpacing+cardEdgeSoften, 
+						gridY+cardTotalHeight+cardSpacing, cardActualWidth - 2*cardEdgeSoften, 
+						cardActualHeight);
+		
+					
+					// Draw 4 circles to create round edges
+					// Upper Left
+					graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing, 
+						gridY+cardTotalHeight+cardSpacing, 2*cardEdgeSoften, 2*cardEdgeSoften);
+					// Upper Right
+					graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing+cardActualWidth-2*cardEdgeSoften, 
+						gridY+cardTotalHeight+cardSpacing, 2*cardEdgeSoften, 2*cardEdgeSoften);
+					// Lower Left
+					graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing, 
+						gridY+cardTotalHeight+cardSpacing+cardActualHeight-2*cardEdgeSoften,
+						2*cardEdgeSoften, 2*cardEdgeSoften);
+					// Lower Right
+					graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing+cardActualWidth-2*cardEdgeSoften, 
+						gridY+cardTotalHeight+cardSpacing+cardActualHeight-2*cardEdgeSoften,
+						 2*cardEdgeSoften, 2*cardEdgeSoften);
+					
+					graphic.setColor(Color.red);
+					
+					//Add code to setColor to Black if card suit is 
+						// Spade or Club
+					if (c.getName().contains("Spades")||c.getName().contains("Clubs")) {
+						graphic.setColor(Color.black);
+					}
+					
+					// Draw/Paint spades
+					if(c.getName().contains("Spades")) {
+						graphic.setColor(Color.black);
+						// fill ovals for Spades
+						graphic.fillOval(gridX+index*cardTotalWidth+40, 
+								gridY+cardTotalHeight+85, 40, 40);
+						graphic.fillOval(gridX+index*cardTotalWidth+40+30, 
+								gridY+cardTotalHeight+85, 40, 40);
+						// fill arc for Spades
+						graphic.fillArc(gridX+index*cardTotalWidth+28, 
+								gridY+cardTotalHeight+30, 90, 70, 230, 80);
+						// fill rectangle (the little stem at the base of the spade)
+						graphic.fillRect(gridX+index*cardTotalWidth+70, 
+								gridY+cardTotalHeight+90, 10, 50);
+						
+					} else if(c.getName().contains("Hearts")) 
+					{
+						// Draw hearts/Paint
+						graphic.setColor(Color.red);
+						graphic.fillOval(gridX+index*cardTotalWidth+40, 
+								gridY+cardTotalHeight+70, 40, 40);
+						graphic.fillOval(gridX+index*cardTotalWidth+40+30, 
+								gridY+cardTotalHeight+70, 40, 40);
+						graphic.fillArc(gridX+index*cardTotalWidth+30, 
+								gridY+cardTotalHeight+96, 90, 70, 50, 80);
+					} else if(c.getName().contains("Diamonds")) 
+					{
+						//Draw/Paint Diamonds
+						graphic.setColor(Color.red);
+						// fillPolygon will, as the name implies, fill an n-sided polygon given an array of x and y coordinates
+						int x1,x2,x3,x4,y1,y2,y3,y4;
+						x1 = 75 + gridX + index*cardTotalWidth;
+						y1 = 60 + gridY+cardTotalHeight;
+						x2 = 50 + gridX + index*cardTotalWidth;
+						y2 = 100 + gridY+cardTotalHeight;
+						x3 = 75+ gridX + index*cardTotalWidth;
+						y3 = 140 + gridY+cardTotalHeight;
+						x4 = 100+ gridX + index*cardTotalWidth;
+						y4 = 100 + gridY+cardTotalHeight;
+						int[] xPolyCoordinates = {x1, x2, x3, x4};
+						int[] yPolyCoordinates = {y1, y2, y3, y4};
+						graphic.fillPolygon(xPolyCoordinates, yPolyCoordinates, 4);
+					} else {
+						// Draw clubs by simply removing the arc from the spades drawing and replacing it with a third oval
+						// fill ovals for Clubs
+						graphic.setColor(Color.black);
+						graphic.fillOval(gridX+index*cardTotalWidth+35, 
+								gridY+cardTotalHeight+85, 40, 40);
+						graphic.fillOval(gridX+index*cardTotalWidth+40+35, 
+								gridY+cardTotalHeight+85, 40, 40);
+						// Third oval (instead of arc that's seen in Spades)
+						graphic.fillOval(gridX+index*cardTotalWidth+55, 
+								gridY+cardTotalHeight+55, 40, 40);
+						
+						// fill rectangle (the little stem at the base of the spade)
+						graphic.fillRect(gridX+index*cardTotalWidth+70, 
+								gridY+cardTotalHeight+90, 10, 50);
+					}
+					
+					graphic.setFont(cardFont);
+					graphic.drawString(c.getSymbol(), 
+						gridX+index*cardTotalWidth+cardSpacing*2, 
+						gridY+cardTotalHeight+cardActualHeight);	
+					
+					index++;
+					if(index > 5)
+						break;
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		}  
 		
 	}
@@ -397,6 +654,9 @@ public class Gui extends JFrame
 		public void actionPerformed(ActionEvent e) 
 		{
 			System.out.println("Stay button clicked.");
+			isHitOrStay = false;
+			isDealerTurn = true;
+			dealerHitOrStay();
 			
 		}
 		
