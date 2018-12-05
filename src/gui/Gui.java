@@ -130,8 +130,7 @@ public class Gui extends JFrame
 		stayButton.setText("STAY");
 		
 		board.add(stayButton);
-		
-		
+
 		
 		// Yes Button (to "play again?")
 		ActionYes aYes = new ActionYes();
@@ -156,31 +155,10 @@ public class Gui extends JFrame
 		
 		board.add(noButton);
 		
-		// Using a nested for-loop to add the suit and the value
-			// for each of the cards in the ArrayList all_cards
-		
-		/*
-		String suit = null;
-		for(int k = 0; k < 4; k++) {
-			if (k ==0) {
-				suit = "Hearts";
-			} else if (k == 1) {
-				suit = "Diamonds";
-			} else if (k == 2) {
-				suit = "Spades";
-			} else {
-				suit = "Clubs";
-			}
-			for (int j = 2; j < 15; j++) {
-				all_cards.add(new Card(j, suit));
-			}
-			
-		}
-		*/
 		
 	}
 	
-	
+	// Refreshes the state of the game: Player, dealer, or ask if new game
 	public void refresher()
 	{
 		if(isHitOrStay == true)
@@ -202,13 +180,12 @@ public class Gui extends JFrame
 		}
 	}
 	
-	
+	// Runs the back-end dealer logic to hit or stay
 	public void dealerHitOrStay()
 	{
 		Driver.theDealer.dealersTurn(Driver.thePlayer);
 		Driver.theDealer.getDealerHand().calculateCurrentHandValue();
 	}
-	
 	
 	
 	
@@ -220,6 +197,7 @@ public class Gui extends JFrame
 		private static final long serialVersionUID = 1L;
 
 		 
+		// Draw the table and cards
 		public void paintComponent(Graphics graphic)
 		{
 			// Got background color to work
@@ -384,12 +362,10 @@ public class Gui extends JFrame
 					break;
 			}
 			
+
 			
-			
-			
-			
-			
-			{	// Draw single visible dealer card
+			// Draw single visible dealer card
+			{	
 				
 				graphic.setColor(Color.white);
 				
@@ -500,7 +476,6 @@ public class Gui extends JFrame
 			}
 			
 			
-			
 			// Draw Dealer face-down card
 			index = 1;
 			{
@@ -535,11 +510,7 @@ public class Gui extends JFrame
 				
 			}
 			
-			
-			
-			
-			
-			
+	
 			
 			//Draw/ Paint Dealer Cards
 			if(isDealerTurn == true)
@@ -654,20 +625,14 @@ public class Gui extends JFrame
 				}
 			}
 			
-			
-			
-			
-			
-			
-			
-			
-			
+	
 			
 		}  
 		
 	}
 	
 	
+	// Executes when player clicks Hit button
 	public class ActionHit implements ActionListener
 	{
 
@@ -691,6 +656,7 @@ public class Gui extends JFrame
 	}
 	
 	
+	// Executes when player clicks Stay button
 	public class ActionStay implements ActionListener
 	{
 
@@ -707,6 +673,7 @@ public class Gui extends JFrame
 	}
 	
 	
+	// Executes when player clicks Yes button
 	public class ActionYes implements ActionListener
 	{
 
@@ -720,6 +687,7 @@ public class Gui extends JFrame
 	}
 	
 	
+	// Executes when player clicks No button
 	public class ActionNo implements ActionListener
 	{
 
@@ -730,8 +698,9 @@ public class Gui extends JFrame
 			
 		}
 		
-	}
-	
+	}	
 	
 	
 }
+
+
