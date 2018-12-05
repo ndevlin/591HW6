@@ -31,6 +31,16 @@ public class Gui extends JFrame
 	Color colorButton = new Color(250, 250, 250);
 	
 	
+	// Game phases booleans
+	boolean bool_hit_stay = true;
+	boolean bool_dealer_turn = false;
+	boolean bool_play_more = false;
+	
+	
+	// Strings
+	String play_moreQ = "Play Again?";
+	
+	
 	// Buttons
 	JButton hitButton = new JButton();
 	JButton stayButton = new JButton();
