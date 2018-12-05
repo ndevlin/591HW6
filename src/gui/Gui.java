@@ -205,7 +205,8 @@ public class Gui extends JFrame
 	
 	public void dealerHitOrStay()
 	{
-		
+		Driver.theDealer.dealersTurn(Driver.thePlayer);
+		Driver.theDealer.getDealerHand().calculateCurrentHandValue();
 	}
 	
 	
@@ -500,6 +501,39 @@ public class Gui extends JFrame
 			
 			
 			
+			// Draw Dealer face-down card
+			index = 1;
+			{
+				graphic.setColor(Color.gray);
+				
+				// Draw 2 rectangles to allow for round edges
+				// 1st is short and squat
+				graphic.fillRect(gridX+index*cardTotalWidth+cardSpacing, 
+					gridY+cardTotalHeight+cardSpacing+cardEdgeSoften,
+					 cardActualWidth, cardActualHeight - 2*cardEdgeSoften);
+				// Second is tall and skinny 
+				graphic.fillRect(gridX+index*cardTotalWidth+cardSpacing+cardEdgeSoften, 
+					gridY+cardTotalHeight+cardSpacing, cardActualWidth - 2*cardEdgeSoften, 
+					cardActualHeight);
+	
+				
+				// Draw 4 circles to create round edges
+				// Upper Left
+				graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing, 
+					gridY+cardTotalHeight+cardSpacing, 2*cardEdgeSoften, 2*cardEdgeSoften);
+				// Upper Right
+				graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing+cardActualWidth-2*cardEdgeSoften, 
+					gridY+cardTotalHeight+cardSpacing, 2*cardEdgeSoften, 2*cardEdgeSoften);
+				// Lower Left
+				graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing, 
+					gridY+cardTotalHeight+cardSpacing+cardActualHeight-2*cardEdgeSoften,
+					2*cardEdgeSoften, 2*cardEdgeSoften);
+				// Lower Right
+				graphic.fillOval(gridX+index*cardTotalWidth+cardSpacing+cardActualWidth-2*cardEdgeSoften, 
+					gridY+cardTotalHeight+cardSpacing+cardActualHeight-2*cardEdgeSoften,
+					 2*cardEdgeSoften, 2*cardEdgeSoften);
+				
+			}
 			
 			
 			
@@ -642,6 +676,16 @@ public class Gui extends JFrame
 		{
 			System.out.println("Hit button clicked.");
 			
+			if(Driver.thePlayer.getPlayersHand().calculateCurrentHandValue() <= 21)
+			{
+				Driver.theDealer.playerHit(Driver.thePlayer).getName();
+			}
+			if(Driver.thePlayer.getPlayersHand().calculateCurrentHandValue() > 21)
+			{
+				//Player busted
+					
+			}
+				
 		}
 		
 	}
