@@ -16,7 +16,7 @@ public class Driver implements Runnable
 	// game phases booleans
 	boolean bool_hit_stay = true;
 	boolean dealer_turn = false;
-	
+	 
 	
 	static Dealer theDealer = new Dealer();
 	static Player thePlayer = new Player();
@@ -46,6 +46,7 @@ public class Driver implements Runnable
 	{
 		while(true)
 		{
+			gui.refresher();
 			gui.repaint();
 			
 			

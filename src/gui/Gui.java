@@ -32,9 +32,9 @@ public class Gui extends JFrame
 	
 	
 	// Game phases booleans
-	boolean bool_hit_stay = true;
-	boolean bool_dealer_turn = false;
-	boolean bool_play_more = false;
+	boolean isHitOrStay = true;
+	boolean isDealerTurn = false;
+	boolean playAgain = false;
 	
 	
 	// Strings
@@ -89,7 +89,7 @@ public class Gui extends JFrame
 	// Fonts
 	Font buttonFont = new Font("Times New Roman", Font.PLAIN, 30);
 	Font cardFont = new Font("Times New Roman", Font.BOLD, 35);
-	
+	Font questionFont = new Font("Times New Roman", Font.PLAIN, 35);
 	
 	
 	public Gui()
@@ -181,6 +181,29 @@ public class Gui extends JFrame
 	}
 	
 	
+	public void refresher()
+	{
+		if(isHitOrStay == true)
+		{
+			hitButton.setVisible(true);
+			stayButton.setVisible(true);
+			yesButton.setVisible(false);
+			noButton.setVisible(false);
+			
+		}
+		else if(isDealerTurn == true)
+		{
+			hitButton.setVisible(false);
+			stayButton.setVisible(false);
+			yesButton.setVisible(true);
+			noButton.setVisible(true);
+			
+			
+		}
+	}
+	
+	
+	
 	public class Board extends JPanel
 	{
 		/**
@@ -207,6 +230,16 @@ public class Gui extends JFrame
 			
 			// temp "play again" grid
 			graphic.drawRect(paX, paY, paW, paH);
+			
+			
+			
+			// Play Again question
+			graphic.setFont(questionFont);
+			if(playAgain == true)
+			{
+				graphic.drawString(play_moreQ, paX +26, paY +60);
+			}
+			
 			
 			
 			// make a for-loop to draw the grid spaces where each card will be (both our cards and dealer's cards)
