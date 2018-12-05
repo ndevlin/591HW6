@@ -252,6 +252,7 @@ public class Gui extends JFrame
 				}
 				
 
+
 				
 				// Draw spades
 				if(c.suit.equalsIgnoreCase("Spades")) {
@@ -288,6 +289,17 @@ public class Gui extends JFrame
 					int[] xPolyCoordinates = {x1, x2, x3, x4};
 					int[] yPolyCoordinates = {y1, y2, y3, y4};
 					graphic.fillPolygon(xPolyCoordinates, yPolyCoordinates, 4);
+				} else {
+					// Draw clubs by simply removing the arc from the spades drawing and replacing it with a third oval
+					// fill ovals for Clubs
+					graphic.setColor(Color.black);
+					graphic.fillOval(gridX+index*cardTotalWidth+35, gridY+85, 40, 40);
+					graphic.fillOval(gridX+index*cardTotalWidth+40+35, gridY+85, 40, 40);
+					// Third oval (instead of arc that's seen in Spades)
+					graphic.fillOval(gridX+index*cardTotalWidth+55, gridY+55, 40, 40);
+					
+					// fill rectangle (the little stem at the base of the spade)
+					graphic.fillRect(gridX+index*cardTotalWidth+70, gridY+90, 10, 50);
 				}
 				
 				
