@@ -8,6 +8,10 @@ package ndevlin_blackjack;
 
 import java.util.ArrayList;
 
+
+//COMPLETED interface for betting and floormanager, implemented interface through their classes, and then created instnaces as objects.
+//TODO 1. Where to call the functions (i.e. where are the rounds being played? where is the winner total being tallied?)
+//TODO 2. End game when player or dealer runs out of money. Specifically, don't prompt player / dealer to play game again. 
 /**
  * @author Nathan
  */
@@ -24,6 +28,13 @@ public class Dealer
 	private Hand dealerHand;
 	
 	private Card visibleCard;
+	private Betting bet;
+
+	
+/*	//minimum amount a player can bet per turn
+	private final static int Bet_Minimum = 5;
+
+	private final static int DealerBalance = 500;*/
 	
 	
 	/**
@@ -36,6 +47,7 @@ public class Dealer
 		dealerScore = 0;
 		playerScore = 0;
 		lastRoundResult = 0;
+		bet = new Betting(500);
 		
 		dealerHand = new Hand();
 	}
@@ -43,6 +55,16 @@ public class Dealer
 	
 	// Getters
 	
+	public Betting getBet() {
+		return bet;
+	}
+
+
+	public void setBet(Betting bet) {
+		this.bet = bet;
+	}
+
+
 	/** Returns theDeck Deck */
 	public Deck getTheDeck() {
 		return theDeck;
@@ -148,6 +170,8 @@ public class Dealer
 		
 		dealerHand.calculateCurrentHandValue();
 		thePlayer.getPlayersHand().calculateCurrentHandValue();
+		//getting bet and updating
+		thePlayer.getBet().placeBet();
 		
 		if(thePlayer.getPlayersHand().calculateCurrentHandValue() > 21)
 		{

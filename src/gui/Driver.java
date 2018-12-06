@@ -20,11 +20,14 @@ public class Driver implements Runnable
 	
 	static Dealer theDealer = new Dealer();
 	static Player thePlayer = new Player();
-	
+	//creating instance of floor manager
+	static FloorManager theManager = new FloorManager();
+
 	static int handNumber = 1;
 	static int input = 0;
 	
 	static boolean userExit = false;
+	
 	
 	
 	public static void main(String[] args) 
@@ -36,8 +39,10 @@ public class Driver implements Runnable
 		
 		thePlayer.getPlayersHand().calculateCurrentHandValue();
 		theDealer.getDealerHand().calculateCurrentHandValue();
-		
-		
+		//assume player turn happened and dealer turn happened
+		theManager.betsPlaced(thePlayer, theDealer);
+		//assume player won the round
+		theManager.moneyToWinner(thePlayer.getBet());
 
 	}
 
