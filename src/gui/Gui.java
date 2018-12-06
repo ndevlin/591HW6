@@ -21,7 +21,6 @@ public class Gui extends JFrame
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
 	// Height and width of window
 	int WIDTH = 1280;
 	int HEIGHT = 720;
@@ -45,6 +44,7 @@ public class Gui extends JFrame
 	JButton hitButton = new JButton();
 	JButton stayButton = new JButton();
 	JButton yesButton = new JButton();
+	JButton betButton = new JButton();
 	JButton noButton = new JButton();
 	
 	
@@ -118,6 +118,19 @@ public class Gui extends JFrame
 	 
 		board.add(hitButton);
 		
+		
+		
+		//Add bet $50 button
+		ActionBet aBet = new ActionBet();
+		betButton.addActionListener(aBet);
+		
+		// Set the location/color/font/text for the hit button
+		betButton.setBounds(hsX+40, hsY+160, 160, 80);
+		betButton.setBackground(Color.MAGENTA);
+		betButton.setFont(buttonFont);
+		betButton.setText("BET $50");
+	 
+		board.add(betButton);
 		
 		
 		// Stay button
@@ -654,6 +667,20 @@ public class Gui extends JFrame
 		}
 		
 	}
+	
+	// Executes when player clicks Bet button
+		public class ActionBet implements ActionListener
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+				System.out.println("You bet $50. Gambling is dangerous.");
+				
+					
+			}
+			
+		}
 	
 	
 	// Executes when player clicks Stay button
