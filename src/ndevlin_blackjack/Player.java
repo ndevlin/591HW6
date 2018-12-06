@@ -11,11 +11,19 @@ package ndevlin_blackjack;
  */
 public class Player
 {
+	private Betting bet;
+	
+	public void setBet(Betting bet) {
+		this.bet = bet;
+	}
+
+
 	Hand playersHand;
 	
 	private int currentWins;
 	
 	private boolean staying;
+	
 
 	/**
 	 * Constructor
@@ -26,6 +34,7 @@ public class Player
 		playersHand = new Hand();
 		currentWins = 0;
 		staying = false;
+		bet = new Betting(500);
 	}
 	
 	
@@ -81,6 +90,12 @@ public class Player
 		this.discardHand(theDeck);
 		playersHand = theNewHand;
 		staying = false;
+	}
+
+
+	public Betting getBet() {
+		// TODO Auto-generated method stub
+		return bet;
 	}
 	
 }

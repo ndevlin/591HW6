@@ -8,8 +8,10 @@ package ndevlin_blackjack;
 
 public interface Betting_Interface {
 
-	public int placeBet (Player player, int betAmount);
+	public void placeBet ();
 	
+	public int getBet();
+
 }
 
 
