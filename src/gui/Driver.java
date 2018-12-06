@@ -7,6 +7,9 @@ import ndevlin_blackjack.*;
 /**
  * @author Nathan
  */
+
+// Currently working version
+
 public class Driver implements Runnable
 {
 	
@@ -27,7 +30,6 @@ public class Driver implements Runnable
 	static int input = 0;
 	
 	static boolean userExit = false;
-	
 	
 	
 	public static void main(String[] args) 
@@ -53,10 +55,6 @@ public class Driver implements Runnable
 		{
 			gui.refresher();
 			gui.repaint();
-			
-			
-			
-			
 			
 		}
 		

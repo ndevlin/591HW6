@@ -711,6 +711,8 @@ public class Gui extends JFrame
 		{
 			System.out.println("Yes button clicked.");
 			
+			
+			
 		}
 		
 	}
