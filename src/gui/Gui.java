@@ -22,6 +22,8 @@ public class Gui extends JFrame
 	private static final long serialVersionUID = 1L;
 	
 	
+	String messageToDisplay = "";
+	
 	// Height and width of window
 	int WIDTH = 1280;
 	int HEIGHT = 720;
@@ -625,7 +627,9 @@ public class Gui extends JFrame
 				}
 			}
 			
-	
+			graphic.setColor(Color.black);
+			graphic.drawString(messageToDisplay, 100, 550);
+			
 			
 		}  
 		
@@ -667,6 +671,31 @@ public class Gui extends JFrame
 			isHitOrStay = false;
 			isDealerTurn = true;
 			dealerHitOrStay();
+			
+			Driver.thePlayer.getPlayersHand().calculateCurrentHandValue();
+			
+			// Updated Dealer's cards
+			Driver.theDealer.getDealerHand().calculateCurrentHandValue();
+			
+			if(Driver.theDealer.resultOfLastRound() == 0)
+			{
+				messageToDisplay = "Push.   ";
+			}
+			else if(Driver.theDealer.resultOfLastRound() == 1)
+			{
+				messageToDisplay = "You Won!  ";
+				
+				
+				// playerMoney += betAmount;
+				
+			}
+			else if(Driver.theDealer.resultOfLastRound() == 2)
+			{
+				messageToDisplay = "You Lost! ";
+				
+				
+				// Take bet from player
+			}
 			
 		}
 		
