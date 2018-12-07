@@ -21,6 +21,7 @@ public class Gui extends JFrame
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	
 	// Height and width of window
 	int WIDTH = 1280;
 	int HEIGHT = 720;
