@@ -21,7 +21,10 @@ public class Gui extends JFrame
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
+    JLabel Title = new JLabel("Welcome to BlackJack", JLabel.CENTER);
+    JLabel PlayerCards = new JLabel("Player Cards", JLabel.CENTER);
+    JLabel DealerCards = new JLabel("Dealer Cards", JLabel.CENTER);
+ 
 	String messageToDisplay = "";
 	
 	// Height and width of window
@@ -121,6 +124,19 @@ public class Gui extends JFrame
 	 
 		board.add(hitButton);
 		
+		//Adding BlackJack title
+	   Title.setSize(220,10);
+	   Title.setForeground(Color.white);
+		board.add(Title);
+	    
+		//Player and Dealer Cards label
+		PlayerCards.setSize(220,70);
+		PlayerCards.setForeground(Color.white);
+		board.add(PlayerCards);
+		
+		DealerCards.setSize(220,930);
+		DealerCards.setForeground(Color.white);
+		board.add(DealerCards);
 		
 		
 		//Add bet $50 button
@@ -682,7 +698,6 @@ public class Gui extends JFrame
 			{
 				System.out.println("You bet $50. Gambling is dangerous.");
 				
-					
 			}
 			
 		}
