@@ -208,7 +208,6 @@ public class Gui extends JFrame
 			yesButton.setVisible(true);
 			noButton.setVisible(true);
 			
-			
 		}
 	}
 	
@@ -256,6 +255,16 @@ public class Gui extends JFrame
 			if(playAgain == true)
 			{
 				graphic.drawString(play_moreQ, paX +26, paY +60);
+			// Display the point totals for player and dealer cards
+			} else if (isHitOrStay == true) {
+				graphic.setFont(cardFont);
+				graphic.setColor(Color.white);
+				graphic.drawString("Player's Points: "+Integer.toString(Driver.thePlayer.getPlayersHand().calculateCurrentHandValue()), hsX - 500, hsY + 490);
+			} else if (isDealerTurn == true) {
+				graphic.setFont(cardFont);
+				graphic.setColor(Color.white);
+				graphic.drawString("Player's Points: "+Integer.toString(Driver.thePlayer.getPlayersHand().calculateCurrentHandValue()), hsX - 500, hsY + 490);
+				graphic.drawString("Dealer's Points: "+Integer.toString(Driver.theDealer.getDealerHand().calculateCurrentHandValue()), hsX - 500, hsY + 530);
 			}
 			
 			
@@ -754,7 +763,8 @@ public class Gui extends JFrame
 		{
 			System.out.println("Yes button clicked.");
 			
-			
+			playAgain = true;
+			//Driver.theDealer.dealNewHand(Driver.thePlayer);
 			
 		}
 		
