@@ -24,15 +24,23 @@ public class Gui extends JFrame
     JLabel Title = new JLabel("Welcome to BlackJack", JLabel.CENTER);
     JLabel PlayerCards = new JLabel("Player Cards", JLabel.CENTER);
     JLabel DealerCards = new JLabel("Dealer Cards", JLabel.CENTER);
+    int bet = 50;
+    JLabel betAmount = new JLabel("You bet $" +bet, JLabel.CENTER);
+    JLabel dealerBetAmount = new JLabel("Dealer matched with $" +bet, JLabel.CENTER);
+    JLabel winnings = new JLabel("You won $100", JLabel.CENTER);
+    JLabel losings = new JLabel("You lost $50!", JLabel.CENTER);
+    JLabel danger = new JLabel("Gambling is dangerous", JLabel.CENTER);
  
 	String messageToDisplay = "";
+	//String betToDisplay = "";
+	JTextField betToDisplay = new JTextField();
 	
 	// Height and width of window
 	int WIDTH = 1280;
 	int HEIGHT = 720;
 	
 	// Colors of various elements
-	Color backgroundColor = new Color(40, 120, 20);
+	Color backgroundColor = new Color(163, 205, 96);
 	Color colorButton = new Color(250, 250, 250);
 	
 	
@@ -40,6 +48,7 @@ public class Gui extends JFrame
 	boolean isHitOrStay = true;
 	boolean isDealerTurn = false;
 	boolean playAgain = false;
+	boolean betMoney = false;
 	
 	
 	// Strings
@@ -125,9 +134,43 @@ public class Gui extends JFrame
 		board.add(hitButton);
 		
 		//Adding BlackJack title
-	   Title.setSize(220,10);
-	   Title.setForeground(Color.white);
+	   Title.setSize(1200,40);
+	   Title.setForeground(Color.BLACK);
+	   Title.setFont(new Font("Serif", Font.BOLD, 24));
 		board.add(Title);
+		
+		//Adding bet amount jlabel 
+		betAmount.setSize(2250,1020);
+		betAmount.setForeground(Color.WHITE);
+		betAmount.setFont(new Font("Serif", Font.BOLD, 20));
+		betAmount.setVisible(false);
+		board.add(betAmount);
+		
+		//Adding dealer bet amount
+		dealerBetAmount.setSize(2235,1060);
+		dealerBetAmount.setForeground(Color.WHITE);
+		dealerBetAmount.setFont(new Font("Serif", Font.BOLD, 20));
+		dealerBetAmount.setVisible(false);
+		board.add(dealerBetAmount);
+		
+		//adding winnings label
+		winnings.setSize(2235,1100);
+		winnings.setForeground(Color.GREEN);
+		winnings.setFont(new Font("Serif", Font.BOLD, 20));
+		winnings.setVisible(false);
+		board.add(winnings);
+		
+		//adding losings label
+		losings.setSize(2235,1100);
+		losings.setForeground(Color.RED);
+		losings.setFont(new Font("Serif", Font.BOLD, 20));
+		losings.setVisible(false);
+		board.add(losings);
+		danger.setSize(2235,1060);
+		danger.setForeground(Color.RED);
+		danger.setFont(new Font("Serif", Font.BOLD, 20));
+		danger.setVisible(false);
+		board.add(danger);
 	    
 		//Player and Dealer Cards label
 		PlayerCards.setSize(220,70);
@@ -254,7 +297,7 @@ public class Gui extends JFrame
 			graphic.setFont(questionFont);
 			if(playAgain == true)
 			{
-				graphic.drawString(play_moreQ, paX +26, paY +60);
+				graphic.drawString(play_moreQ, paX +26, paY +100);
 			// Display the point totals for player and dealer cards
 			} else if (isHitOrStay == true) {
 				graphic.setFont(cardFont);
@@ -668,6 +711,8 @@ public class Gui extends JFrame
 			
 			graphic.setColor(Color.black);
 			graphic.drawString(messageToDisplay, 100, 550);
+			//graphic.drawString(betToDisplay, 300, 500);
+			
 			
 			
 		}  
@@ -704,7 +749,13 @@ public class Gui extends JFrame
 
 			@Override
 			public void actionPerformed(ActionEvent e) 
-			{
+			{	
+				//betToDisplay = "You bet $50. Dealer bet $50";
+				if(e.getSource() == betButton) {
+					bet++;
+					betAmount.setVisible(true);
+					dealerBetAmount.setVisible(true);
+				}
 				System.out.println("You bet $50. Gambling is dangerous.");
 				
 			}
@@ -735,18 +786,21 @@ public class Gui extends JFrame
 			}
 			else if(Driver.theDealer.resultOfLastRound() == 1)
 			{
-				messageToDisplay = "You Won!  ";
+				messageToDisplay = "You're a pro!  ";
 				
-				
-				// playerMoney += betAmount;
+				betAmount.setVisible(false);
+				dealerBetAmount.setVisible(false);
+				winnings.setVisible(true);
 				
 			}
 			else if(Driver.theDealer.resultOfLastRound() == 2)
 			{
-				messageToDisplay = "You Lost! ";
+				messageToDisplay = "Time to go home?";
 				
-				
-				// Take bet from player
+				betAmount.setVisible(false);
+				dealerBetAmount.setVisible(false);
+				losings.setVisible(true);
+				danger.setVisible(true);
 			}
 			
 		}
