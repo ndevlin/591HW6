@@ -17,7 +17,7 @@ public class Betting implements Betting_Interface {
 	
 	public void placeBet () {
 		//scanner to get bet amount
-		int betAmount = 10;
+		int betAmount = 50;
 		bet = betAmount;
 		balance = balance-bet;
 		if(balance<0) {

@@ -24,7 +24,7 @@ public class Gui extends JFrame
     JLabel Title = new JLabel("Welcome to BlackJack", JLabel.CENTER);
     JLabel PlayerCards = new JLabel("Player Cards", JLabel.CENTER);
     JLabel DealerCards = new JLabel("Dealer Cards", JLabel.CENTER);
-    int bet = 50;
+    int bet=50;
     JLabel betAmount = new JLabel("You bet $" +bet, JLabel.CENTER);
     JLabel dealerBetAmount = new JLabel("Dealer matched with $" +bet, JLabel.CENTER);
     JLabel winnings = new JLabel("You won $100", JLabel.CENTER);
@@ -248,6 +248,7 @@ public class Gui extends JFrame
 		{
 			hitButton.setVisible(false);
 			stayButton.setVisible(false);
+			betButton.setVisible(false);
 			yesButton.setVisible(true);
 			noButton.setVisible(true);
 			
@@ -752,7 +753,8 @@ public class Gui extends JFrame
 			{	
 				//betToDisplay = "You bet $50. Dealer bet $50";
 				if(e.getSource() == betButton) {
-					bet++;
+					int newBet=50;
+					bet = newBet;
 					betAmount.setVisible(true);
 					dealerBetAmount.setVisible(true);
 				}

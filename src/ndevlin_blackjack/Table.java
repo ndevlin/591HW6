@@ -122,7 +122,7 @@ public class Table
 			}
 			else if(theDealer.resultOfLastRound() == 1)
 			{
-				System.out.println("Player wins! ");
+				System.out.println("Player wins!");
 			}
 			else if(theDealer.resultOfLastRound() == 2)
 			{
