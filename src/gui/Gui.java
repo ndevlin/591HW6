@@ -264,6 +264,8 @@ public class Gui extends JFrame
 			
 			
 			
+			
+			
 			// Play Again question
 			graphic.setFont(questionFont);
 			if(playAgain == true)
@@ -760,7 +762,13 @@ public class Gui extends JFrame
 					bet = newBet;
 					betAmount.setVisible(true);
 					dealerBetAmount.setVisible(true);
+					//delete from here if fup
+/*					if(stayButton.isSelected()) {
+						betButton.setEnabled(false);
+					}*/
+
 				}
+
 				System.out.println("You bet $50. Gambling is dangerous.");
 				
 			}
@@ -779,6 +787,7 @@ public class Gui extends JFrame
 			isHitOrStay = false;
 			isDealerTurn = true;
 			dealerHitOrStay();
+			betButton.setVisible(false);
 			
 			Driver.thePlayer.getPlayersHand().calculateCurrentHandValue();
 			
@@ -788,11 +797,12 @@ public class Gui extends JFrame
 			if(Driver.theDealer.resultOfLastRound() == 0)
 			{
 				messageToDisplay = "Push.   ";
+		
 			}
 			else if(Driver.theDealer.resultOfLastRound() == 1)
 			{
 				messageToDisplay = "You're a pro!  ";
-				
+				//play_moreQ.setVisible(true);
 				betAmount.setVisible(false);
 				dealerBetAmount.setVisible(false);
 				winnings.setVisible(true);
@@ -822,13 +832,21 @@ public class Gui extends JFrame
 		public void actionPerformed(ActionEvent e) 
 		{
 			System.out.println("Yes button clicked.");
-			
+			betButton.setVisible(true);
 			playAgain = true;
 			isDealerTurn = false;
+			betAmount.setVisible(false);
+			dealerBetAmount.setVisible(false);
+			losings.setVisible(false);
+			winnings.setVisible(false);
+			danger.setVisible(false);
+			messageToDisplay = "New Round";
 			Driver.theDealer.dealNewHand(Driver.thePlayer);
 			
 			
 		}
+
+		
 		
 	}
 	
