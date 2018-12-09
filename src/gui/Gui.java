@@ -233,36 +233,6 @@ public class Gui extends JFrame
 		
 	}
 	
-	// Refreshes the state of the game: Player, dealer, or ask if new game
-	public void refresher()
-	{
-		if(isHitOrStay == true)
-		{
-			hitButton.setVisible(true);
-			stayButton.setVisible(true);
-			yesButton.setVisible(false);
-			noButton.setVisible(false);
-			
-		}
-		else if(isDealerTurn == true)
-		{
-			hitButton.setVisible(false);
-			stayButton.setVisible(false);
-			betButton.setVisible(false);
-			yesButton.setVisible(true);
-			noButton.setVisible(true);
-			
-		}
-	}
-	
-	// Runs the back-end dealer logic to hit or stay
-	public void dealerHitOrStay()
-	{
-		Driver.theDealer.dealersTurn(Driver.thePlayer);
-		Driver.theDealer.getDealerHand().calculateCurrentHandValue();
-	}
-	
-	
 	
 	public class Board extends JPanel
 	{
@@ -721,6 +691,39 @@ public class Gui extends JFrame
 	}
 	
 	
+	// Refreshes the state of the game: Player, dealer, or ask if new game
+		public void refresher()
+		{
+			if(isHitOrStay == true)
+			{
+				hitButton.setVisible(true);
+				stayButton.setVisible(true);
+				//yesButton.setVisible(false);
+				//noButton.setVisible(false);
+				
+			}
+			/*
+			else if(isDealerTurn == true)
+			{
+				hitButton.setVisible(false);
+				stayButton.setVisible(false);
+				betButton.setVisible(false);
+				yesButton.setVisible(true);
+				noButton.setVisible(true);
+				
+			}
+			*/
+		}
+		
+		// Runs the back-end dealer logic to hit or stay
+		public void dealerHitOrStay()
+		{
+			Driver.theDealer.dealersTurn(Driver.thePlayer);
+			Driver.theDealer.getDealerHand().calculateCurrentHandValue();
+		}
+	
+	
+	
 	// Executes when player clicks Hit button
 	public class ActionHit implements ActionListener
 	{
@@ -804,6 +807,7 @@ public class Gui extends JFrame
 				losings.setVisible(true);
 				danger.setVisible(true);
 			}
+		
 			
 		}
 		
@@ -820,7 +824,9 @@ public class Gui extends JFrame
 			System.out.println("Yes button clicked.");
 			
 			playAgain = true;
-			//Driver.theDealer.dealNewHand(Driver.thePlayer);
+			isDealerTurn = false;
+			Driver.theDealer.dealNewHand(Driver.thePlayer);
+			
 			
 		}
 		
