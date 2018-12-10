@@ -7,6 +7,10 @@
 
 package ndevlin_blackjack;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.Test;
+
 /**
  * @author Nathan
  */
@@ -104,8 +108,7 @@ public class Card
 	public String getSymbol() {
 		return symbol;
 	}
-	
-	
+		
 	
 	/** returns the cardNumber variable */
 	public int getCardNumber() {

@@ -6,6 +6,10 @@
 
 package ndevlin_blackjack;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.Test;
+
 /**
  * @author Nathan
  */
@@ -44,6 +48,15 @@ public class Player
 	public Hand getPlayersHand() {
 		return playersHand;
 	}
+	
+	/**
+	 * This method tests that a Player's current wins is initially zero.
+	 */
+	@Test
+	public void testCurrentWins() {
+  		Player testPlayer = new Player();
+  		assertEquals(0, testPlayer.getCurrentWins());
+	}
 
 	/** Returns the currentWins value */
 	public int getCurrentWins() {
@@ -78,6 +91,17 @@ public class Player
 	{
 		currentWins++;
 		return currentWins;
+	}
+	
+
+	/**
+	 * Tests that the addWin functionality works
+	 */
+	@Test
+	public void testAddWin() {
+ 		Player testPlayer = new Player();
+ 		testPlayer.addWin();
+ 		assertEquals(1, testPlayer.getCurrentWins());
 	}
 
 	

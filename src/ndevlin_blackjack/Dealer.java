@@ -79,6 +79,9 @@ public class Dealer
 		return dealerScore;
 	}
 	
+	/**
+	 * This method tests that the dealer's score is initialized to zero.
+	 */
 	@Test
 	public void dealerScoreTest() {
   		Dealer testDealer = new Dealer();
@@ -86,6 +89,9 @@ public class Dealer
   		assertEquals(0, testDealer.getDealerScore());
 	}
 	
+	/**
+	 * This method tests that the player's score is initialized to zero.
+	 */
 	@Test
 	public void playerScoreTest() {
   		Dealer testDealer = new Dealer();
@@ -93,6 +99,9 @@ public class Dealer
   		assertEquals(0, testDealer.getPlayerScore());
 	}
 	
+	/**
+	 * This method tests that the default for result of last round is zero.
+	 */
 	@Test
 	public void lastRoundTest() {
   		Dealer testDealer = new Dealer();

@@ -6,7 +6,11 @@
 
 package ndevlin_blackjack;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
+
+import org.junit.Test;
 
 /**
  * @author Nathan
@@ -73,6 +77,7 @@ public class Hand
 	{
 		return theHand.size();
 	}
+
 
 	/** Returns the isBusted boolean */
 	public boolean isBusted() {
@@ -173,7 +178,6 @@ public class Hand
 		
 		return result;
 	}
-	
 	
 	/** Returns the number of 11-valued Aces in the hand */
 	public int getNumberFullElevenAces()
