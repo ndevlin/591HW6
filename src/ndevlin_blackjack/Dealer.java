@@ -181,6 +181,27 @@ public class Dealer
 		dealerHand.addCard(theDeck.drawCard());
 	}
 	
+	/**
+	 * Method tests that when addCard() is called, it correctly adds a card to the hand
+	 */
+	@Test
+	public void testAddCard() {
+		Deck testDeck = new Deck();
+		Hand testDealerHand = new Hand();
+		testDealerHand.addCard(testDeck.drawCard());
+		assertEquals(1, testDealerHand.getSize());
+	}
+	
+	/**
+	 * Method tests that when dealerHit() is called, it correctly adds a card to the hand
+	 */
+	@Test
+	public void testDealerHit() {
+		Dealer testDealer = new Dealer();
+		testDealer.dealerHit();
+		assertEquals(1, testDealer.getDealerHand().getSize());
+	}
+	
 	
 	/**
 	 * Accepts a Player as parameter, returns the current value of the hand as an int
