@@ -6,7 +6,11 @@
 
 package ndevlin_blackjack;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
+
+import org.junit.Test;
 
 
 //COMPLETED interface for betting and floormanager, implemented interface through their classes, and then created instnaces as objects.
@@ -73,6 +77,27 @@ public class Dealer
 	/** Returns the number of times the dealer has won, dealerScore */
 	public int getDealerScore() {
 		return dealerScore;
+	}
+	
+	@Test
+	public void dealerScoreTest() {
+  		Dealer testDealer = new Dealer();
+  		testDealer.getDealerScore();
+  		assertEquals(0, testDealer.getDealerScore());
+	}
+	
+	@Test
+	public void playerScoreTest() {
+  		Dealer testDealer = new Dealer();
+  		testDealer.getDealerScore();
+  		assertEquals(0, testDealer.getPlayerScore());
+	}
+	
+	@Test
+	public void lastRoundTest() {
+  		Dealer testDealer = new Dealer();
+  		testDealer.resultOfLastRound();
+  		assertEquals(0, testDealer.resultOfLastRound());
 	}
 
 	/** Returns the number of times the player has won, playerScore */
@@ -226,7 +251,6 @@ public class Dealer
 		
 		return 0;
 	}
-	
 }
 
 
