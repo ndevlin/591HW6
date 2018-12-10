@@ -331,8 +331,12 @@ public class Gui extends JFrame
 			if(playAgain == true)
 			{
 				graphic.drawString(play_moreQ, paX +26, paY +100);
+				graphic.setFont(cardFont);
+				graphic.setColor(Color.white);
+				graphic.drawString("Player's Points: "+Integer.toString(Driver.thePlayer.getPlayersHand().calculateCurrentHandValue()), hsX - 500, hsY + 490);
+				
 			/**
-			 * Display the point totals for player and dealer cards
+			 * Display the point totals for player
 			 */
 			} else if (isHitOrStay == true) {
 				graphic.setFont(cardFont);
@@ -342,7 +346,6 @@ public class Gui extends JFrame
 				graphic.setFont(cardFont);
 				graphic.setColor(Color.white);
 				graphic.drawString("Player's Points: "+Integer.toString(Driver.thePlayer.getPlayersHand().calculateCurrentHandValue()), hsX - 500, hsY + 490);
-				graphic.drawString("Dealer's Points: "+Integer.toString(Driver.theDealer.getDealerHand().calculateCurrentHandValue()), hsX - 500, hsY + 530);
 			}
 
 
