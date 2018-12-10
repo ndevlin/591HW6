@@ -859,7 +859,7 @@ public class Gui extends JFrame
 		public void actionPerformed(ActionEvent e) 
 		{
 			System.out.println("No button clicked.");
-			
+			System.exit(0);
 		}
 		
 	}	
