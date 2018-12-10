@@ -1,4 +1,10 @@
 package ndevlin_blackjack;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+
 /**
  * 
  * @author Hasan
@@ -9,7 +15,7 @@ package ndevlin_blackjack;
 public class Betting implements Betting_Interface {
 
 	private int bet;
-	private int balance;
+	public int balance;
 	
 	public Betting(int balance) {
 		this.balance=balance;
@@ -33,6 +39,7 @@ public class Betting implements Betting_Interface {
 	public void addBalance(int totalTableMoney) {
 		balance = balance + totalTableMoney;
 	}
+
 
 }
 

@@ -22,7 +22,7 @@ public class Deck
 	
 	
 	/** holds the discarded cards	 */
-	private ArrayList<Card> discardPile;
+	ArrayList<Card> discardPile;
 
 
 	/** 
