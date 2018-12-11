@@ -1001,7 +1001,7 @@ public class Gui extends JFrame
 /*					if(stayButton.isSelected()) {
 						betButton.setEnabled(false);
 					}*/
-
+					Driver.theDealer.dealNewHand(Driver.thePlayer);
 					if(moneyAmount >= 50)
 					{
 						moneyAmount-=50;
@@ -1108,9 +1108,9 @@ public class Gui extends JFrame
 			losings.setVisible(false);
 			winnings.setVisible(false);
 			danger.setVisible(false);
-			messageToDisplay = "New Round";
+			messageToDisplay = "Make a Bet!";
 			betButton.setVisible(true);
-			Driver.theDealer.dealNewHand(Driver.thePlayer);
+			
 
 		}
 
