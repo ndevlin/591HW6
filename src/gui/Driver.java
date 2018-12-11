@@ -1,8 +1,6 @@
 package gui;
 
-
 import ndevlin_blackjack.*;
-
 
 /**
  * @author Nathan
@@ -14,7 +12,6 @@ public class Driver implements Runnable
 {
 	
 	Gui gui = new Gui();
-	
 	
 	// game phases booleans
 	boolean bool_hit_stay = true;
@@ -48,6 +45,7 @@ public class Driver implements Runnable
 
 	}
 
+	
 	@Override
 	public void run() 
 	{
@@ -61,3 +59,6 @@ public class Driver implements Runnable
 	}
 
 }
+
+
+

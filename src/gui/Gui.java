@@ -1,4 +1,3 @@
-
 package gui;
 
 import javax.swing.*;
@@ -7,9 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 import ndevlin_blackjack.*;
-
 
 /**
  *@Group
@@ -57,7 +54,6 @@ public class Gui extends JFrame
 
 	String play_moreQ = "Play Again?";
 
-
 	/**
 	 * Creation of game buttons
 	 */
@@ -91,7 +87,6 @@ public class Gui extends JFrame
 	int paW = hsW;
 	int paH = 200;
 
-
 	/**
 	 * ArrayList that will hold all of the cards in the deck, player's cards, and dealer's cards
 	 */
@@ -99,7 +94,6 @@ public class Gui extends JFrame
 	ArrayList<ndevlin_blackjack.Card> player_cards = new ArrayList<ndevlin_blackjack.Card>();
 	ArrayList<ndevlin_blackjack.Card> dealer_cards = new ArrayList<ndevlin_blackjack.Card>();
 	ndevlin_blackjack.Card visibleDealerCard;
-
 
 	/**
 	 *We want to have space for six cards across in our grid & and space for two cards in "height" on the playing grid
@@ -232,7 +226,6 @@ public class Gui extends JFrame
 
 		board.add(betButton);
 
-
 		/**
 		 * Add stay button to the board
 		 */
@@ -244,7 +237,6 @@ public class Gui extends JFrame
 		stayButton.setText("STAY");
 
 		board.add(stayButton);
-
 
 		/**
 		 * yes Button (to "play again?") added to th board
@@ -259,7 +251,6 @@ public class Gui extends JFrame
 
 		board.add(yesButton);
 
-
 		/**
 		 * No Button (to "play again?") added to the board
 		 */
@@ -272,8 +263,6 @@ public class Gui extends JFrame
 		noButton.setText("NO");
 
 		board.add(noButton);
-
-
 	}
 
 	/**
@@ -321,9 +310,6 @@ public class Gui extends JFrame
 			graphic.drawRect(paX, paY, paW, paH);
 
 
-
-
-
 			/**
 			 * Play Again question
 			 */
@@ -347,7 +333,6 @@ public class Gui extends JFrame
 				graphic.setColor(Color.white);
 				graphic.drawString("Player's Points: "+Integer.toString(Driver.thePlayer.getPlayersHand().calculateCurrentHandValue()), hsX - 500, hsY + 490);
 			}
-
 
 
 			// make a for-loop to draw the grid spaces where each card will be (both our cards and dealer's cards)
@@ -376,8 +361,6 @@ public class Gui extends JFrame
 			Driver.theDealer.getDealerHand().calculateCurrentHandValue();
 			dealer_cards = Driver.theDealer.getDealerHand().getTheHand();
 			visibleDealerCard = Driver.theDealer.getVisibleCard();
-
-
 
 			/**
 			 * Draw/Paint Player Cards
@@ -533,8 +516,6 @@ public class Gui extends JFrame
 				if(index > 5)
 					break;
 			}
-
-
 
 			/**
 			 * Draw single visible dealer card
@@ -750,8 +731,6 @@ public class Gui extends JFrame
 
 			}
 
-
-
 			/**
 			 * Draw/ Paint Dealer Cards
 			 */
@@ -912,13 +891,8 @@ public class Gui extends JFrame
 			graphic.setColor(Color.black);
 			graphic.drawString(messageToDisplay, 100, 550);
 			//graphic.drawString(betToDisplay, 300, 500);
-
-
-
 		}
-
 	}
-
 
 	/**
 	 * Refreshes the state of the game: Player, dealer, or ask if new game
@@ -954,8 +928,6 @@ public class Gui extends JFrame
 			Driver.theDealer.dealersTurn(Driver.thePlayer);
 			Driver.theDealer.getDealerHand().calculateCurrentHandValue();
 		}
-
-
 
 	/**
 	 * Executes when player clicks Hit button
@@ -1015,11 +987,8 @@ public class Gui extends JFrame
 				}
 
 				System.out.println("You bet $50. Gambling is dangerous.");
-
 			}
-
 		}
-
 
 	/**
 	 * Executes when player clicks Stay button
@@ -1083,7 +1052,6 @@ public class Gui extends JFrame
 
 	}
 
-
 	/**
 	 * Executes when player clicks Yes button
 	 * @author Group
@@ -1116,7 +1084,6 @@ public class Gui extends JFrame
 
 	}
 
-
 	/**
 	 * Executes when player clicks No button
 	 * @author Group
@@ -1134,6 +1101,9 @@ public class Gui extends JFrame
 		}
 
 	}
-
-
 }
+
+
+
+
+
