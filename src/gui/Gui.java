@@ -23,13 +23,16 @@ public class Gui extends JFrame
     JLabel PlayerCards = new JLabel("Player Cards", JLabel.CENTER);
     JLabel DealerCards = new JLabel("Dealer Cards", JLabel.CENTER);
     int bet=50;
-    JLabel betAmount = new JLabel("You bet $" +bet, JLabel.CENTER);
-    JLabel dealerBetAmount = new JLabel("Dealer matched with $" +bet, JLabel.CENTER);
-    JLabel winnings = new JLabel("You won $100", JLabel.CENTER);
-    JLabel losings = new JLabel("You lost $50!", JLabel.CENTER);
+    JLabel betAmount = new JLabel("", JLabel.CENTER);
+    JLabel dealerBetAmount = new JLabel("", JLabel.CENTER);
+    JLabel winnings = new JLabel("", JLabel.CENTER);
+    JLabel losings = new JLabel("", JLabel.CENTER);
     JLabel danger = new JLabel("Gambling is dangerous", JLabel.CENTER);
 
 	String messageToDisplay = "";
+	String yourMoney = "Your money: ";
+	int moneyAmount = 1000;
+	int pot = 0;
 	JTextField betToDisplay = new JTextField();
 
 	/**
@@ -108,6 +111,8 @@ public class Gui extends JFrame
 	int cardTotalHeight = gridH/2;
 	int cardActualWidth = cardTotalWidth - 2*cardSpacing;
 	int cardActualHeight = cardTotalHeight- 2*cardSpacing;
+	
+	boolean isFirstHand = true;
 
 	/**
 	 * Standardizing font usage
@@ -187,11 +192,11 @@ public class Gui extends JFrame
 		/**
 		 * adding losings jlabel to the board
 		 */
-		losings.setSize(2235,1100);
+		losings.setSize(2235,100);
 		losings.setForeground(Color.RED);
 		losings.setFont(new Font("Serif", Font.BOLD, 20));
 		losings.setVisible(false);
-		board.add(losings);
+		//board.add(losings);
 		danger.setSize(2235,1060);
 		danger.setForeground(Color.RED);
 		danger.setFont(new Font("Serif", Font.BOLD, 20));
@@ -215,6 +220,7 @@ public class Gui extends JFrame
 		 */
 		ActionBet aBet = new ActionBet();
 		betButton.addActionListener(aBet);
+		
 
 		/**
 		 * Set the location/color/font/text for the bet button
@@ -263,6 +269,7 @@ public class Gui extends JFrame
 		noButton.setText("NO");
 
 		board.add(noButton);
+		betButton.setVisible(true);
 	}
 
 	/**
@@ -282,6 +289,12 @@ public class Gui extends JFrame
 		 */
 		public void paintComponent(Graphics graphic)
 		{
+			if(isFirstHand)
+			{
+				betButton.setVisible(true);
+				isFirstHand = false;
+			}
+			
 			/**
 			 * background color
 			 */
@@ -316,7 +329,7 @@ public class Gui extends JFrame
 			graphic.setFont(questionFont);
 			if(playAgain == true)
 			{
-				graphic.drawString(play_moreQ, paX +26, paY +100);
+				//graphic.drawString(play_moreQ, paX +26, paY +100);
 				graphic.setFont(cardFont);
 				graphic.setColor(Color.white);
 				graphic.drawString("Player's Points: "+Integer.toString(Driver.thePlayer.getPlayersHand().calculateCurrentHandValue()), hsX - 500, hsY + 490);
@@ -890,6 +903,9 @@ public class Gui extends JFrame
 
 			graphic.setColor(Color.black);
 			graphic.drawString(messageToDisplay, 100, 550);
+			graphic.drawString("Your Money: " + moneyAmount, 150, 650);
+			graphic.drawString("Pot: " + pot, 500, 650);
+			graphic.drawString(play_moreQ, 1020, 550);
 			//graphic.drawString(betToDisplay, 300, 500);
 		}
 	}
@@ -943,6 +959,8 @@ public class Gui extends JFrame
 		 */
 		public void actionPerformed(ActionEvent e)
 		{
+			betButton.setVisible(false);
+			
 			System.out.println("Hit button clicked.");
 
 			if(Driver.thePlayer.getPlayersHand().calculateCurrentHandValue() <= 21)
@@ -977,13 +995,23 @@ public class Gui extends JFrame
 				if(e.getSource() == betButton) {
 					int newBet=50;
 					bet = newBet;
-					betAmount.setVisible(true);
+					betButton.setVisible(false);
 					dealerBetAmount.setVisible(true);
 					//delete from here if fup
 /*					if(stayButton.isSelected()) {
 						betButton.setEnabled(false);
 					}*/
 
+					if(moneyAmount >= 50)
+					{
+						moneyAmount-=50;
+						pot += 100;
+					}
+					else
+					{
+						messageToDisplay = "You're Broke.";
+					}
+					
 				}
 
 				System.out.println("You bet $50. Gambling is dangerous.");
@@ -1020,23 +1048,27 @@ public class Gui extends JFrame
 			if(Driver.theDealer.resultOfLastRound() == 0)
 			{
 				messageToDisplay = "Push.   ";
+				moneyAmount += pot;
+				pot = 0;
 
 			}
 			else if(Driver.theDealer.resultOfLastRound() == 1)
 			{
-				messageToDisplay = "You're a pro!  ";
+				messageToDisplay = "You Won!  ";
 				//play_moreQ.setVisible(true);
 				betAmount.setVisible(false);
 				dealerBetAmount.setVisible(false);
 				if(betButton.getModel().isEnabled()) {
 					winnings.setVisible(true);
 				}
+				moneyAmount += pot;
+				pot = 0;
 
 
 			}
 			else if(Driver.theDealer.resultOfLastRound() == 2)
 			{
-				messageToDisplay = "Time to go home?";
+				messageToDisplay = "You Lost";
 
 				betAmount.setVisible(false);
 				dealerBetAmount.setVisible(false);
@@ -1044,6 +1076,7 @@ public class Gui extends JFrame
 				if(betButton.getModel().isEnabled()) {
 					losings.setVisible(true);
 					danger.setVisible(false);
+					pot = 0;
 				}
 			}
 
@@ -1076,6 +1109,7 @@ public class Gui extends JFrame
 			winnings.setVisible(false);
 			danger.setVisible(false);
 			messageToDisplay = "New Round";
+			betButton.setVisible(true);
 			Driver.theDealer.dealNewHand(Driver.thePlayer);
 
 		}
