@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 
 import ndevlin_blackjack.*;
 
+
+
 /**
  *@Group
  * Using blackjack backend to create a gui of the game.
@@ -29,7 +31,7 @@ public class Gui extends JFrame
     JLabel losings = new JLabel("", JLabel.CENTER);
     JLabel danger = new JLabel("Gambling is dangerous", JLabel.CENTER);
 
-	String messageToDisplay = "";
+	String messageToDisplay = "Bet to play a New Hand";
 	String yourMoney = "Your money: ";
 	int moneyAmount = 1000;
 	int pot = 0;
@@ -695,6 +697,7 @@ public class Gui extends JFrame
 			/**
 			 * Draw Dealer face-down card
 			 */
+			
 			index = 1;
 			{
 				graphic.setColor(Color.gray);
@@ -1100,16 +1103,19 @@ public class Gui extends JFrame
 		public void actionPerformed(ActionEvent e)
 		{
 			System.out.println("Yes button clicked.");
-			playAgain = true;
-			betButton.setVisible(true);
-			isDealerTurn = false;
-			betAmount.setVisible(false);
-			dealerBetAmount.setVisible(false);
-			losings.setVisible(false);
-			winnings.setVisible(false);
-			danger.setVisible(false);
-			messageToDisplay = "Make a Bet!";
-			betButton.setVisible(true);
+			if(isDealerTurn)
+			{
+				playAgain = true;
+				betButton.setVisible(true);
+				isDealerTurn = false;
+				betAmount.setVisible(false);
+				dealerBetAmount.setVisible(false);
+				losings.setVisible(false);
+				winnings.setVisible(false);
+				danger.setVisible(false);
+				messageToDisplay = "Make a Bet!";
+				betButton.setVisible(true);
+			}
 			
 
 		}
@@ -1129,9 +1135,11 @@ public class Gui extends JFrame
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-
+			messageToDisplay = "Good game.";
 			System.out.println("No button clicked.");
+			
 			System.exit(0);
+			
 		}
 
 	}

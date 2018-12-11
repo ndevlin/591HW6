@@ -1,3 +1,8 @@
+
+/**
+ * Written by Nathan Devlin, Bjorn Commers and Hassan Abdulah for 591 HW#6
+ */
+
 package gui;
 
 import ndevlin_blackjack.*;
@@ -28,7 +33,7 @@ public class Driver implements Runnable
 	
 	static boolean userExit = false;
 	
-	
+	// Main method
 	public static void main(String[] args) 
 	{
 		new Thread(new Driver()).start();
